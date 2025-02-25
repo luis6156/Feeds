@@ -1,0 +1,26 @@
+# Compose file for local runtime
+
+services:
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    restart: always
+    networks:
+      - shared
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - shared
+
+networks:
+  shared:
+    driver: bridge
