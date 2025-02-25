@@ -17,28 +17,28 @@ public class NotificationTest {
 
     UserRepository userRepository = Mockito.mock(UserRepository.class);
 
-//    @Test
-//    void checkNotificationsAreSent() throws UserNotFoundError, FriendshipAlreadyExistsError {
-//        NotificationService notificationService = Mockito.mock(NotificationService.class);
-//
-//        FriendshipService friendshipService = new FriendshipService(
-//                friendshipRepository,
-//                userRepository,
-//                notificationService
-//        );
-//
-//        User testUser1 = new User();
-//        testUser1.setUid("test1");
-//
-//        User testUser2 = new User();
-//        testUser2.setUid("test2");
-//
-//        Mockito.when(userRepository.findById("test1")).thenReturn(Optional.of(testUser1));
-//        Mockito.when(userRepository.findById("test2")).thenReturn(Optional.of(testUser2));
-//        Mockito.doNothing().when(notificationService).sendEventToClient("test2", Mockito.any());
-//
-//        friendshipService.createFriendship("test1", "test2");
-//
-//        Mockito.verify(notificationService).sendEventToClient("test2", Mockito.any());
-//    }
+    @Test
+    void checkNotificationsAreSent() throws UserNotFoundError, FriendshipAlreadyExistsError {
+        NotificationService notificationService = Mockito.mock(NotificationService.class);
+
+        FriendshipService friendshipService = new FriendshipService(
+                friendshipRepository,
+                userRepository,
+                notificationService
+        );
+
+        User testUser1 = new User();
+        testUser1.setUid("test1");
+
+        User testUser2 = new User();
+        testUser2.setUid("test2");
+
+        Mockito.when(userRepository.findById("test1")).thenReturn(Optional.of(testUser1));
+        Mockito.when(userRepository.findById("test2")).thenReturn(Optional.of(testUser2));
+        Mockito.doNothing().when(notificationService).sendEventToClient(Mockito.anyString(), Mockito.any());
+
+        friendshipService.createFriendship("test1", "test2");
+
+        Mockito.verify(notificationService).sendEventToClient(Mockito.anyString(), Mockito.any());
+    }
 }
