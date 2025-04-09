@@ -1,2 +1,174 @@
-<p class="bg-red-300 text-4xl">home works!</p>
-<app-button></app-button>
+<div class="flex flex-col h-screen w-full bg-[#101010] text-white">
+  <!-- Main Layout -->
+  <div class="flex h-full">
+    <!-- Left Sidebar -->
+    <div class="w-72 border-r border-neutral-800 p-4 hidden md:flex flex-col justify-between">
+      <!-- Logo -->
+      <div class="flex flex-col gap-8">
+        <div class="py-2">
+          <svg viewBox="0 0 192 192" width="36" height="36" fill="white">
+            <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.17c8.332.043 14.646 2.454 18.548 7.148 2.873 3.438 4.745 8.069 5.582 13.978a65.958 65.958 0 0 0-7.854-.499c-15.621.17-25.37 7.29-30.061 14.175-5.516-5.516-13.365-8.048-22.145-7.507-11.946.666-22.495 7.528-28.26 18.376-7.763 14.554-4.69 32.468 7.205 41.356 4.474 3.393 9.846 5.154 15.402 5.154 8.518-.043 17.036-3.732 24.486-10.868 6.822-6.567 12.636-15.772 18.377-28.897 7.507 2.688 13.834 9.452 15.403 19.797-5.688 2.179-9.846 7.507-10.327 13.875-.340 4.474.766 8.815 3.138 12.19 2.348 3.435 5.792 5.858 9.715 6.822 1.226.34 2.474.511 3.732.511 6.226 0 12.126-4.028 14.175-10.327 2.518-7.847-1.482-16.318-8.952-19.371-3.265-17.25-12.717-27.96-24.742-32.255-2.007-10.06-2.518-18.547-1.652-25.541a65.932 65.932 0 0 1 7.937.681c-.17 3.137-.17 6.396 0 9.876.085 3.435 2.974 6.142 6.396 6.142h.341c3.562-.085 6.355-3.054 6.27-6.609-.17-8.433-.681-15.318-1.397-20.96zm-39.806 55.123c-5.154 11.69-10.456 19.967-16.19 25.455-5.323 5.028-10.803 7.484-16.19 7.291-3.732-.17-6.992-1.397-9.593-3.606-8.177-5.922-10.124-17.867-4.608-27.96 4.303-8.006 11.776-13.05 20.023-13.518 6.609-.341 12.377 1.822 16.19 6.142 3.308 3.776 5.069 8.952 4.474 15.061-.085 1.312.596 2.518 1.736 3.181.17.085.426.17.596.255 1.907.851 4.133.255 5.11-1.567 2.179-3.902 1.822-8.262-1.143-10.868 2.689-4.474 5.538-10.295 8.348-17.824 1.389.909 2.821 1.918 4.303 2.913-2.348 6.694-5.263 12.887-8.046 18.05z"/>
+          </svg>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex flex-col gap-1">
+          <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+            <i class="pi pi-home text-xl"></i>
+            <span class="text-lg">Home</span>
+          </a>
+          <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+            <i class="pi pi-search text-xl"></i>
+            <span class="text-lg">Search</span>
+          </a>
+          <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+            <i class="pi pi-pencil text-xl"></i>
+            <span class="text-lg">Create</span>
+          </a>
+          <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+            <i class="pi pi-heart text-xl"></i>
+            <span class="text-lg">Activity</span>
+          </a>
+          <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+            <i class="pi pi-user text-xl"></i>
+            <span class="text-lg">Profile</span>
+          </a>
+        </nav>
+      </div>
+      
+      <!-- More options -->
+      <div class="mb-4">
+        <a class="flex items-center gap-4 p-3 rounded-md hover:bg-neutral-800 transition cursor-pointer">
+          <i class="pi pi-bars text-xl"></i>
+          <span class="text-lg">More</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col max-w-[600px] mx-auto w-full border-r border-l border-neutral-800">
+      <!-- Header -->
+      <div class="sticky top-0 backdrop-blur-md bg-[#101010]/90 border-b border-neutral-800 p-4 z-10">
+        <h1 class="text-xl font-bold">Home</h1>
+      </div>
+
+      <!-- For you / Following tabs -->
+      <div class="border-b border-neutral-800">
+        <div class="flex">
+          <div class="flex-1 text-center py-4 font-medium cursor-pointer hover:bg-neutral-800/50 transition border-b-2 border-white">
+            For you
+          </div>
+          <div class="flex-1 text-center py-4 font-medium cursor-pointer hover:bg-neutral-800/50 transition text-neutral-500">
+            Following
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed -->
+      <div class="flex-1 overflow-y-auto">
+        <!-- Post composer -->
+        <div class="p-4 border-b border-neutral-800">
+          <div class="flex gap-3">
+            <div class="w-10 h-10 rounded-full overflow-hidden">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User avatar" class="w-full h-full object-cover" />
+            </div>
+            <div class="flex-1">
+              <textarea 
+                pTextarea 
+                class="w-full bg-transparent border-0 resize-none text-white focus:outline-none" 
+                rows="2"
+                placeholder="Start a thread..."></textarea>
+              <div class="mt-2 flex justify-between items-center">
+                <div>
+                  <button pButton icon="pi pi-image" class="p-button-text p-button-rounded text-neutral-400"></button>
+                </div>
+                <button pButton label="Post" class="p-button-rounded" [disabled]="true"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts/threads list -->
+        <div *ngFor="let thread of threads" class="border-b border-neutral-800 p-4">
+          <div class="flex gap-3">
+            <!-- Avatar -->
+            <div class="flex flex-col items-center">
+              <div class="w-10 h-10 rounded-full overflow-hidden">
+                <img [src]="thread.user.avatar" alt="User avatar" class="w-full h-full object-cover" />
+              </div>
+              <div class="w-0.5 flex-1 bg-neutral-800 my-2" *ngIf="thread.replies.length > 0"></div>
+            </div>
+
+            <!-- Thread content -->
+            <div class="flex-1">
+              <!-- User info -->
+              <div class="flex justify-between items-start">
+                <div class="flex items-center gap-1">
+                  <span class="font-medium hover:underline cursor-pointer">{{ thread.user.username }}</span>
+                  <span *ngIf="thread.user.verified" class="text-blue-500">
+                    <i class="pi pi-check-circle"></i>
+                  </span>
+                </div>
+                <div class="flex items-center gap-1 text-neutral-500">
+                  <span>{{ thread.createdAt }}</span>
+                  <button pButton icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded text-neutral-400"></button>
+                </div>
+              </div>
+
+              <!-- Thread text -->
+              <div class="my-2 whitespace-pre-wrap">{{ thread.content }}</div>
+
+              <!-- Media -->
+              <div class="mt-2 mb-3 rounded-xl overflow-hidden" *ngIf="thread.media">
+                <img [src]="thread.media" alt="Thread media" class="w-full h-auto" />
+              </div>
+
+              <!-- Actions -->
+              <div class="flex gap-4 mt-2">
+                <button pButton icon="pi pi-heart" class="p-button-text p-button-rounded text-neutral-400"></button>
+                <button pButton icon="pi pi-comment" class="p-button-text p-button-rounded text-neutral-400"></button>
+                <button pButton icon="pi pi-refresh" class="p-button-text p-button-rounded text-neutral-400"></button>
+                <button pButton icon="pi pi-send" class="p-button-text p-button-rounded text-neutral-400"></button>
+              </div>
+
+              <!-- Replies count -->
+              <div class="mt-2 text-sm text-neutral-500" *ngIf="thread.replies.length > 0">
+                {{ thread.replies.length }} {{ thread.replies.length === 1 ? 'reply' : 'replies' }} · 
+                {{ thread.likes }} {{ thread.likes === 1 ? 'like' : 'likes' }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar (suggested users) - desktop only -->
+    <div class="w-72 p-4 hidden lg:block">
+      <div class="sticky top-0">
+        <h2 class="mb-4 text-xl font-bold">Suggested for you</h2>
+        
+        <div *ngFor="let user of suggestedUsers" class="flex items-center justify-between py-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full overflow-hidden">
+              <img [src]="user.avatar" alt="User avatar" class="w-full h-full object-cover" />
+            </div>
+            <div>
+              <div class="font-medium">{{ user.username }}</div>
+              <div class="text-sm text-neutral-500">{{ user.fullName }}</div>
+            </div>
+          </div>
+          <button pButton label="Follow" class="p-button-outlined p-button-rounded"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom navigation -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-[#101010] border-t border-neutral-800 flex justify-around p-2">
+    <button pButton icon="pi pi-home" class="p-button-text p-button-rounded text-white"></button>
+    <button pButton icon="pi pi-search" class="p-button-text p-button-rounded text-neutral-400"></button>
+    <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded text-neutral-400"></button>
+    <button pButton icon="pi pi-heart" class="p-button-text p-button-rounded text-neutral-400"></button>
+    <button pButton icon="pi pi-user" class="p-button-text p-button-rounded text-neutral-400"></button>
+  </div>
+</div>
