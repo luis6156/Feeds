@@ -5,6 +5,10 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
+import { getAuth } from 'firebase/auth';
+import { provideAuth } from '@angular/fire/auth';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +19,10 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideFirebaseApp(() => {
+      return initializeApp(environment.firebaseConfig);
+    }),
+    provideAuth(() => getAuth()),
     provideRouter(routes)
   ]
 };
