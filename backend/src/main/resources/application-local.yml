@@ -14,3 +14,9 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration, classpath:acs/poo/backend/db/migration
+firebase:
+  auth:
+    enabled: true
+    test:
+      uid: TWCGRSAGufbpip7pTHT2bMAVd692
+      token-generation: true
