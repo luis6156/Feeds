@@ -1,0 +1,45 @@
+-- 1. USERS Table
+CREATE TABLE users (
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT users_pkey PRIMARY KEY (id)
+);
+
+-- 2. POSTS Table (One-to-Many with USERS)
+CREATE TABLE posts (
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    user_id INT NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT posts_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 3. PROFILES Table (One-to-One with USERS)
+CREATE TABLE profiles (
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    user_id INT NOT NULL UNIQUE, -- UNIQUE ensures one-to-one relationship
+    bio TEXT,
+    profile_picture_url VARCHAR(255),
+	CONSTRAINT profiles_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_user_profile FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 4. TAGS Table
+CREATE TABLE tags (
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2000 CACHE 1 ),
+    name VARCHAR(50) NOT NULL UNIQUE,
+	CONSTRAINT tags_pkey PRIMARY KEY (id)
+);
+
+-- 5. POST_TAGS Table (Many-to-Many between POSTS and TAGS)
+CREATE TABLE post_tags (
+    post_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    PRIMARY KEY (post_id, tag_id),
+    CONSTRAINT fk_post FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_tag FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+);

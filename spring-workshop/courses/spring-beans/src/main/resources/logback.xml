@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!-- declare property for target directory    -->
+    <property name="LOG_DIR" value="spring-beans/logs" />
+    <!-- log to stdout -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%level] %logger{10} => %msg\n</pattern>
+        </encoder>
+        <!-- filter out logs that have level below WARN -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+    </appender>
+    <!-- log in target/testFile.log   -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_DIR}/testFile.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%level] %logger{40} => %msg\n</pattern>
+        </encoder>
+    </appender>
+    <!-- using both appenders; if you want to use only one, remove it from root and remove its declaration -->
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
