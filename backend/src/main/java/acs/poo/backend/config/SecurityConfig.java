@@ -1,6 +1,5 @@
 package acs.poo.backend.config;
 
-<<<<<<< HEAD
 import acs.poo.backend.firebase.FirebaseAuthFilter;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,10 +32,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-             .cors(AbstractHttpConfigurer::disable)
-             .authorizeHttpRequests(auth -> {
-                 auth.anyRequest().permitAll();
-             });
+                .cors(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> {
+                    auth.anyRequest().permitAll();
+                });
 
         try {
             http.addFilterBefore(
@@ -63,23 +62,5 @@ public class SecurityConfig {
         }
 
         return Optional.empty();
-=======
-import lombok.NonNull;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-@Configuration
-public class SecurityConfig {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(@NonNull CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
-            }
-        };
->>>>>>> 33698c89ca80143a9dfa19eade1cc90484930f75
     }
 }
