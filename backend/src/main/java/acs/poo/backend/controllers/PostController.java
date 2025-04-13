@@ -2,6 +2,8 @@ package acs.poo.backend.controllers;
 
 import acs.poo.backend.dtos.CommentDTO;
 import acs.poo.backend.dtos.PostDTO;
+import acs.poo.backend.dtos.PostListResponse;
+import acs.poo.backend.dtos.PostResponse;
 import acs.poo.backend.entities.Post;
 import acs.poo.backend.errors.PostNotFoundError;
 import acs.poo.backend.errors.UserNotFoundError;
@@ -25,12 +27,12 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Post>> listPosts() {
+    public ResponseEntity<PostListResponse> listPosts() {
         return ResponseEntity.ok(postService.listPosts());
     }
 
     @GetMapping("/following")
-    public ResponseEntity<List<Post>> listPostsOfFriends(@RequestParam String userId) throws UserNotFoundError {
+    public ResponseEntity<PostListResponse> listPostsOfFriends(@RequestParam String userId) throws UserNotFoundError {
         return ResponseEntity.ok(postService.getFeedPosts(userId));
     }
 
@@ -48,12 +50,12 @@ public class PostController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<Post> getPostById(@RequestParam String postId) throws PostNotFoundError {
+    public ResponseEntity<PostResponse> getPostById(@RequestParam String postId) throws PostNotFoundError {
         return ResponseEntity.ok(postService.getPostById(postId));
     }
 
     @GetMapping("/find/{userId}")
-    public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable String userId) throws UserNotFoundError {
+    public ResponseEntity<PostListResponse> getPostsByUserId(@PathVariable String userId) throws UserNotFoundError {
         return ResponseEntity.ok(postService.getPostsByUserId(userId));
     }
 }
