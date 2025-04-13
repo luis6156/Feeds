@@ -8,4 +8,4 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build-env /app/target .
 
-ENTRYPOINT ["java", "-jar", "backend-1.0.0.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prd", "backend-1.0.0.jar"]
