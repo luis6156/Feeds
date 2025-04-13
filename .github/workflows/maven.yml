@@ -30,6 +30,6 @@ jobs:
       # if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: |
         docker login ${{ secrets.DOCKER_REGISTRY }} -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PWD }}
-        docker build -t feeds-app .
+        docker build -t feeds-app ./backend
         docker tag feeds-app "${{ secrets.DOCKER_REGISTRY }}/feeds-app:latest"
         docker push "${{ secrets.DOCKER_REGISTRY }}/feeds-app:latest"
