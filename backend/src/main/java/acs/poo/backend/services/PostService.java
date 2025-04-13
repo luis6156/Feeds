@@ -2,6 +2,8 @@ package acs.poo.backend.services;
 
 import acs.poo.backend.dtos.CommentDTO;
 import acs.poo.backend.dtos.PostDTO;
+import acs.poo.backend.dtos.PostListResponse;
+import acs.poo.backend.dtos.PostResponse;
 import acs.poo.backend.entities.Comment;
 import acs.poo.backend.entities.Post;
 import acs.poo.backend.errors.PostNotFoundError;
@@ -19,6 +21,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -38,13 +41,18 @@ public class PostService {
         postRepository.save(post);
     }
 
-    public List<Post> listPosts() {
+    public PostListResponse listPosts() {
+        PostListResponse response = new PostListResponse();
+
         var posts = new ArrayList<>(StreamSupport.stream(postRepository.findAll().spliterator(), false).toList());
         Collections.shuffle(posts);
-        return posts;
+
+        response.setPosts(posts.stream().map((element) -> modelMapper.map(element, PostResponse.class)).toList());
+        return response;
     }
 
-    public List<Post> getFeedPosts(String uid) throws UserNotFoundError {
+    public PostListResponse getFeedPosts(String uid) throws UserNotFoundError {
+        PostListResponse response = new PostListResponse();
         var user = userRepository.findById(uid).orElseThrow(UserNotFoundError::new);
 
         var friendships = friendshipRepository.findBySenderOrReceiverAndIsAccepted(user, user, true);
@@ -56,7 +64,9 @@ public class PostService {
                     return friendship.getSender();
                 }).toList();
 
-        return postRepository.findAllByUserIn(users);
+        response.setPosts(postRepository.findAllByUserIn(users).stream()
+                .map((element) -> modelMapper.map(element, PostResponse.class)).collect(Collectors.toList()));
+        return response;
     }
 
     public void addCommentToPost(String userId, String postUid, CommentDTO commentDTO) throws PostNotFoundError, UserNotFoundError {
@@ -74,11 +84,14 @@ public class PostService {
         postRepository.delete(post);
     }
 
-    public Post getPostById(String postUid) throws PostNotFoundError {
-        return postRepository.findById(postUid).orElseThrow(PostNotFoundError::new);
+    public PostResponse getPostById(String postUid) throws PostNotFoundError {
+        return modelMapper.map(postRepository.findById(postUid).orElseThrow(PostNotFoundError::new), PostResponse.class);
     }
 
-    public List<Post> getPostsByUserId(String userId) throws UserNotFoundError {
-        return postRepository.findAllByUserIn(List.of(userRepository.findById(userId).orElseThrow(UserNotFoundError::new)));
+    public PostListResponse getPostsByUserId(String userId) throws UserNotFoundError {
+        PostListResponse response = new PostListResponse();
+        var posts = postRepository.findAllByUserIn(List.of(userRepository.findById(userId).orElseThrow(UserNotFoundError::new)));
+        response.setPosts(posts.stream().map((element) -> modelMapper.map(element, PostResponse.class)).toList());
+        return response;
     }
 }

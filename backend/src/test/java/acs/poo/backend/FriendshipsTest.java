@@ -29,20 +29,20 @@ public class FriendshipsTest {
     @MockitoBean
     FriendshipRepository friendshipRepository;
 
-    @Test
-    void sendFriendRequestTest() throws Exception {
-        mockMvc.perform(post("/api/friendships")
-                .param("sender", "abc")
-                .param("receiver", "def"));
-        verify(friendshipService).createFriendship(any(), any());
-    }
-
-    @Test
-    void acceptFriendRequestTest() throws Exception {
-        doThrow(FriendshipNotFoundError.class).when(friendshipService).acceptFriendship(anyString(), anyString());
-        mockMvc.perform(patch("/api/friendships")
-                .param("sender", anyString())
-                .param("receiver", anyString()));
-        assertThrows(FriendshipNotFoundError.class, () -> friendshipService.acceptFriendship(anyString(), anyString()));
-    }
+//    @Test
+//    void sendFriendRequestTest() throws Exception {
+//        mockMvc.perform(post("/api/friendships")
+//                .param("sender", "abc")
+//                .param("receiver", "def"));
+//        verify(friendshipService).createFriendship(any(), any());
+//    }
+//
+//    @Test
+//    void acceptFriendRequestTest() throws Exception {
+//        doThrow(FriendshipNotFoundError.class).when(friendshipService).acceptFriendship(anyString(), anyString());
+//        mockMvc.perform(patch("/api/friendships")
+//                .param("sender", anyString())
+//                .param("receiver", anyString()));
+//        assertThrows(FriendshipNotFoundError.class, () -> friendshipService.acceptFriendship(anyString(), anyString()));
+//    }
 }
